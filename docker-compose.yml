@@ -98,7 +98,7 @@ services:
       - grafana_data:/var/lib/grafana
       - /home/theo/docker/dockprom-portainer/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - /home/theo/docker/dockprom-portainer/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-      - /home/theo/docker/dockprom-portainer/grafana.ini:/etc/grafana/grafana.ini
+      - /home/theo/docker/dockprom-portainer/grafana/grafana.ini:/etc/grafana/grafana.ini
     env_file:
       - stack.env
     restart: unless-stopped
