@@ -24,8 +24,8 @@ services:
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     restart: unless-stopped
-    expose:
-      - 9090
+    ports:
+      - 9090:9090
     networks:
       - monitor-net
     labels:
@@ -40,7 +40,7 @@ services:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
     restart: unless-stopped
-    expose:
+    expose:   # change to ports if need to access this service directly, then add it to caddyfile
       - 9093
     networks:
       - monitor-net
@@ -102,8 +102,8 @@ services:
     env_file:
       - stack.env
     restart: unless-stopped
-    expose:
-      - 3000
+    ports:
+      - 3000:3000
     networks:
       - monitor-net
     labels:
@@ -120,21 +120,21 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-  caddy:
-    image: caddy:2.7.6
-    container_name: caddy
-    ports:
-      - "3000:3000"
-      - "8085:8085"
-      - "9090:9090"
-      - "9093:9093"
-      - "9091:9091"
-    volumes:
-      - /home/theo/docker/dockprom-portainer/caddy:/etc/caddy
-    env_file:
-      - stack.env
-    restart: unless-stopped
-    networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
+  # caddy:
+  #   image: caddy:2.7.6
+  #   container_name: caddy
+  #   ports:
+  #     - "3000:3000"
+  #     - "8085:8085"
+  #     - "9090:9090"
+  #     - "9093:9093"
+  #     - "9091:9091"
+  #   volumes:
+  #     - /home/theo/docker/dockprom-portainer/caddy:/etc/caddy
+  #   env_file:
+  #     - stack.env
+  #   restart: unless-stopped
+  #   networks:
+  #     - monitor-net
+  #   labels:
+  #     org.label-schema.group: "monitoring"
